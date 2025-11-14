@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, FormEvent } from 'react';
-import { Eye, EyeOff, X } from 'lucide-react'; // Importando ícones para o "olho" e fechar
+import { Eye, EyeOff, Link, X } from 'lucide-react'; // Importando ícones para o "olho" e fechar
 
 interface FormData {
     email: string;
@@ -16,7 +16,7 @@ const Cadastro: React.FC = () => {
         senha: '',
         confirmarSenha: '',
     });
-    
+
     // ➡️ NOVOS ESTADOS PARA VISIBILIDADE DE SENHA
     const [showSenha, setShowSenha] = useState(false);
     const [showConfirmarSenha, setShowConfirmarSenha] = useState(false);
@@ -51,14 +51,14 @@ const Cadastro: React.FC = () => {
         e.preventDefault();
         setPasswordError(null); // Limpa erros anteriores
         setSuccessMessage(null); // Limpa sucesso anterior
-        
+
         if (formData.senha !== formData.confirmarSenha) {
             setPasswordError("As senhas não coincidem. Por favor, verifique.");
             return;
         }
-        
+
         console.log("Dados de Cadastro:", formData);
-        
+
         setSuccessMessage("✅ Cadastro realizado com sucesso!");
         // Opcional: Limpar formulário após sucesso
         setFormData({
@@ -72,14 +72,14 @@ const Cadastro: React.FC = () => {
     return (
         <div className="app-container">
             <header className="header">
-                <img src="/img/Nailo1.png" alt="Descrição" 
-                width={50}height={50}/>
+                <img src="/img/Nailo1.png" alt="Descrição"
+                    width={50} height={50} />
             </header>
-            
+
             <main className="main-content">
                 <div className="card-cadastro">
                     <h2 className="card-title-login">Cadastro</h2>
-                    
+
                     {/* Mensagem de Erro (Substituindo alert) */}
                     {passwordError && (
                         <div className="message error-message">
@@ -87,7 +87,7 @@ const Cadastro: React.FC = () => {
                             <button className="close-btn" onClick={() => setPasswordError(null)}><X size={16} /></button>
                         </div>
                     )}
-                    
+
                     {/* Mensagem de Sucesso (Substituindo alert) */}
                     {successMessage && (
                         <div className="message success-message">
@@ -97,48 +97,48 @@ const Cadastro: React.FC = () => {
                     )}
 
                     <form className="cadastro-form" onSubmit={handleSubmit}>
-                        
+
                         {/* Campo Email */}
                         <div className="input-group">
                             <label htmlFor="email">Email</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                required 
+                                required
                             />
                         </div>
-                        
+
                         {/* Campo Telefone */}
                         <div className="input-group">
                             <label htmlFor="telefone">Telefone:</label>
-                            <input 
-                                type="tel" 
-                                id="telefone" 
-                                name="telefone" 
+                            <input
+                                type="tel"
+                                id="telefone"
+                                name="telefone"
                                 value={formData.telefone}
                                 onChange={handleChange}
                             />
                         </div>
-                        
+
                         {/* Campo Senha - 🔑 Com Olhinho */}
                         <div className="input-group">
                             <label htmlFor="senha">Senha</label>
                             <div className="password-input-wrapper">
-                                <input 
+                                <input
                                     // ➡️ TIPO DINÂMICO
-                                    type={showSenha ? 'text' : 'password'} 
-                                    id="senha" 
-                                    name="senha" 
+                                    type={showSenha ? 'text' : 'password'}
+                                    id="senha"
+                                    name="senha"
                                     value={formData.senha}
                                     onChange={handleChange}
-                                    required 
+                                    required
                                 />
-                                <button 
-                                    type="button" 
-                                    onClick={toggleSenhaVisibility} 
+                                <button
+                                    type="button"
+                                    onClick={toggleSenhaVisibility}
                                     className="toggle-password-btn"
                                     aria-label={showSenha ? "Esconder senha" : "Mostrar senha"}
                                 >
@@ -147,23 +147,23 @@ const Cadastro: React.FC = () => {
                                 </button>
                             </div>
                         </div>
-                        
+
                         {/* Campo Confirmar Senha - 🔑 Com Olhinho */}
                         <div className="input-group">
                             <label htmlFor="confirmarSenha">Confirmar senha</label>
                             <div className="password-input-wrapper">
-                                <input 
+                                <input
                                     // ➡️ TIPO DINÂMICO
-                                    type={showConfirmarSenha ? 'text' : 'password'} 
-                                    id="confirmarSenha" 
-                                    name="confirmarSenha" 
+                                    type={showConfirmarSenha ? 'text' : 'password'}
+                                    id="confirmarSenha"
+                                    name="confirmarSenha"
                                     value={formData.confirmarSenha}
                                     onChange={handleChange}
-                                    required 
+                                    required
                                 />
-                                <button 
-                                    type="button" 
-                                    onClick={toggleConfirmarSenhaVisibility} 
+                                <button
+                                    type="button"
+                                    onClick={toggleConfirmarSenhaVisibility}
                                     className="toggle-password-btn"
                                     aria-label={showConfirmarSenha ? "Esconder senha" : "Mostrar senha"}
                                 >
@@ -172,12 +172,14 @@ const Cadastro: React.FC = () => {
                                 </button>
                             </div>
                         </div>
-                        
-                        <button type="submit" className="btn-cadastro">Cadastrar</button>
+
+                        <Link href="/home">
+                            <button type="button" className="btn-cadastro">Cadastrar</button>
+                        </Link>
 
                         <p className="register-text">
-                        Já tem conta? 
-                        <a href="/" className="register-link">Entre</a> 
+                            Já tem conta?
+                            <a href="/" className="register-link">Entre</a>
                         </p>
                     </form>
                 </div>
